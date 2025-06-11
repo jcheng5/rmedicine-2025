@@ -1,11 +1,12 @@
-library(dotenv) # Will read OPENAI_API_KEY from .env file
 library(ellmer)
 
-chat <- chat_openai(
-  model = "gpt-4.1",
+client <- chat_anthropic(
+  model = "claude-3-5-haiku-latest",
   system_prompt = "You are a terse assistant.",
 )
-chat$chat("What is the capital of the moon?")
+client$chat("What is the capital of France?")
 
-# The `chat` object is stateful, so this continues the existing conversation
-chat$chat("Are you sure about that?")
+# The `client` object is stateful, so this continues the existing conversation
+client$chat("What is its most famous landmark?")
+
+live_browser(client)

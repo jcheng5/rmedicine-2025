@@ -1,0 +1,15 @@
+h1.title {
+  font-size: 2em;
+}
+p.subtitle {
+  font-size: 1.5em;
+}
+section#title-slide {
+  text-align: left;
+}
+.reveal .quarto-title-block .quarto-title-authors .quarto-title-author {
+  padding: 0;
+}
+.reveal .quarto-title-block .quarto-title-authors {
+  justify-content: left;
+}

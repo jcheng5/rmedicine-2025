@@ -1,4 +1,3 @@
-library(dotenv) # Will read OPENAI_API_KEY from .env file
 library(ellmer)
 library(beepr)
 
@@ -18,15 +17,15 @@ play_sound <- function(sound = c("correct", "incorrect", "you-win")) {
   list(success = TRUE, value = NULL)
 }
 
-chat <- chat_openai(
-  model = "gpt-4.1",
+client <- chat_anthropic(
+  model = "claude-sonnet-4-20250514",
   system_prompt = paste(collapse = "\n", readLines("02-tools-prompt.md", warn = FALSE))
 )
 
 # Give the chatbot the ability to play a sound.
 #
 # Created using `ellmer::create_tool_def(play_sound)`
-chat$register_tool(tool(
+client$register_tool(tool(
   play_sound,
   "Plays a sound effect.",
   sound = type_string(
@@ -35,5 +34,5 @@ chat$register_tool(tool(
   )
 ))
 
-chat$chat("Begin", echo = TRUE) # Jump-start the conversation
-live_console(chat, quiet = TRUE) # Continue the conversation
+client$chat("Begin", echo = TRUE) # Jump-start the conversation
+live_console(client, quiet = TRUE) # Continue the conversation

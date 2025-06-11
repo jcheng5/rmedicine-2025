@@ -1,4 +1,3 @@
-library(dotenv) # Will read OPENAI_API_KEY from .env file
 library(ellmer)
 
 # Define the structured data specification using ellmer's `type_` functions
@@ -12,15 +11,15 @@ fruit_schema <- type_object(
   )
 )
 
-# Create a chat object with a specific system prompt
-chat <- chat_openai(
-  model = "gpt-4.1",
+# Create a client object with a specific system prompt
+client <- chat_anthropic(
+  model = "claude-sonnet-4-20250514",
   system_prompt = "You are a helpful assistant. Always respond in valid JSON format."
 )
 
 # Function to get structured response
 get_structured_response <- function(prompt) {
-  chat$extract_data(
+  client$extract_data(
     prompt,
     type = fruit_schema
   )

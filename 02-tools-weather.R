@@ -27,16 +27,16 @@ get_weather <- function(latitude, longitude) {
   )
 }
 
-# Create chat instance
-chat <- chat_openai(
-  model = "gpt-4.1",
+# Create client instance
+client <- chat_anthropic(
+  model = "claude-sonnet-4-20250514",
   system_prompt = "You are a helpful assistant that can check the weather. Report results in imperial units."
 )
 
 # Register the weather tool
 #
 # Created using `ellmer::create_tool_def(get_weather)`
-chat$register_tool(tool(
+client$register_tool(tool(
   get_weather,
   "Fetches weather information for a specified location given by latitude and 
 longitude.",
@@ -48,5 +48,5 @@ longitude.",
   )
 ))
 
-# Test the chat
-chat$chat("What is the weather in Seattle?")
+# Test the client
+client$chat("What is the weather in Seattle?")
