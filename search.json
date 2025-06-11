@@ -158,7 +158,7 @@
     "href": "index.html#how-it-works",
     "title": "Demystifying LLMs with Ellmer",
     "section": "How It Works",
-    "text": "How It Works\n\nNot like this - with the assistant executing stuff\nYes like this\n\nUser asks assistant a question; includes metadata for available tools\nAssistant asks the user to invoke a tool, passing its desired arguments\nUser invokes the tool, and returns the output to the assistant\nAssistant incorporates the tool’s output as additional context for formulating a response"
+    "text": "How It Works\n\nUser asks assistant a question; includes metadata for available tools\nAssistant asks the user to invoke a tool, passing its desired arguments\nUser invokes the tool, and returns the output to the assistant\nAssistant incorporates the tool’s output as additional context for formulating a response"
   },
   {
     "objectID": "index.html#how-it-works-1",
