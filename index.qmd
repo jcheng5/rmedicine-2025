@@ -10,6 +10,7 @@ format:
     slide-number: true
     chalkboard: true
     css: "styles.css"
+    footer: https://jcheng5.github.io/rmedicine-2025
 editor:
   render-on-save: true
 ---
@@ -540,4 +541,8 @@ Open `04-structured.R`, skim the code, and run it.
 1. Open `05-vision.R`, skim the code, and run it.
 2. Try modifying the code to use a different image, and ask a different question.
 
-# Questions?
+# Thank you
+
+- Ellmer: https://ellmer.tidyverse.org
+- Workshop slides: https://jcheng5.github.io/rmedicine-2025
+- Workshop materials: https://github.com/jcheng5/rmedicine-2025
