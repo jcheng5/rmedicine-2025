@@ -1,0 +1,345 @@
+[
+  {
+    "objectID": "apps/tool-chat/prompt.html",
+    "href": "apps/tool-chat/prompt.html",
+    "title": "",
+    "section": "",
+    "text": "You are an assistant which can convert units and perform basic arithmetic with units."
+  },
+  {
+    "objectID": "02-tools-prompt.html",
+    "href": "02-tools-prompt.html",
+    "title": "",
+    "section": "",
+    "text": "You’re hosting a quiz game show.\n\nBefore you start, ask the user to choose a theme.\nAsk simple questions and ask the user to answer them via multiple choice.\nAfter the user answers, provide feedback and then move on to the next question.\nAfter every 5 questions, declare the user to be a winner regardless of their score, lavish them with praise, and start the game over.\nPlay sound effects for each answer, and when the user ‘wins’.\nEmojis are fun, use them liberally!\n\nExample:\n&lt;Assistant&gt;\n  **Question 3:** What is the center of an atom called?\n\n  A) Electron\n  B) Proton\n  C) Neutron\n  D) Nucleus\n\n  Your answer?\n&lt;/Assistant&gt;\n&lt;User&gt;\n  D\n&lt;/User&gt;\n&lt;Assistant&gt;\n  &lt;ToolCall&gt;\n    {\n      id: \"call_1551214\",\n      function: {\n        arguments: \"{sound: 'correct'}\",\n        name: \"play_sound\"\n      },\n      type: \"function\"\n    }\n  &lt;/ToolCall&gt;\n&lt;/Assistant&gt;\n&lt;User&gt;\n  &lt;ToolResponse&gt;\n    {\n      id: \"call_1551214\",\n      result: {\n        success: true,\n        value: null\n      }\n    }\n  &lt;/ToolResponse&gt;\n&lt;/User&gt;\n&lt;Assistant&gt;\n  Correct! The nucleus is the center of an atom.\n\n  **Question 4:** ...\n&lt;/Assistant&gt;\""
+  },
+  {
+    "objectID": "index.html#setup",
+    "href": "index.html#setup",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Setup",
+    "text": "Setup\n\nClone https://github.com/jcheng5/rmedicine-2025\nOpen the repo in RStudio as a project, or in Positron as a folder\nGrab your Anthropic key by going to:\nhttps://beacon.joecheng.com\nand save it to .Renviron\nInstall required packages\n\ninstall.packages(c(\"ellmer\", \"shinychat\", \"shiny\", \"paws.common\",\n  \"magick\", \"beepr\"))\n\nRestart R"
+  },
+  {
+    "objectID": "index.html#intended-audience",
+    "href": "index.html#intended-audience",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Intended audience",
+    "text": "Intended audience\n\nYou are comfortable coding in R\nYou may have used LLMs via ChatGPT, Copilot, or similar\nBut you haven’t used LLMs from code"
+  },
+  {
+    "objectID": "index.html#framing-llms",
+    "href": "index.html#framing-llms",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Framing LLMs",
+    "text": "Framing LLMs\n\n\nOur focus: Practical, actionable information\n\nOften, just enough knowledge so you know what to search for (or better yet, what to ask an LLM)\n\nWe will treat LLMs as black boxes\nDon’t focus on how they work (yet)\n\nLeads to bad intuition about their capabilities\nBetter to start with a highly empirical approach"
+  },
+  {
+    "objectID": "index.html#llm-conversations-are-http-requests",
+    "href": "index.html#llm-conversations-are-http-requests",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "LLM Conversations are HTTP Requests",
+    "text": "LLM Conversations are HTTP Requests\n\n\nEach interaction is a separate HTTP API request\nThe API server is entirely stateless (despite conversations being inherently stateful!)"
+  },
+  {
+    "objectID": "index.html#example-conversation",
+    "href": "index.html#example-conversation",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Example Conversation",
+    "text": "Example Conversation\n\n“What is the capitol of France?”\n\n\"Paris.\"\n\n“What is its most famous landmark?”\n\n\"The Eiffel Tower.\""
+  },
+  {
+    "objectID": "index.html#example-request",
+    "href": "index.html#example-request",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Example Request",
+    "text": "Example Request\ncurl https://api.openai.com/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4.1\",\n    \"messages\": [\n        {\"role\": \"system\", \"content\": \"You are a terse assistant.\"},\n        {\"role\": \"user\", \"content\": \"What is the capitol of France?\"}\n    ]\n}'\n\nSystem prompt: behind-the-scenes instructions and information for the model\nUser prompt: a question or statement for the model to respond to"
+  },
+  {
+    "objectID": "index.html#example-response-abridged",
+    "href": "index.html#example-response-abridged",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Example Response (abridged)",
+    "text": "Example Response (abridged)\n{\n  \"choices\": [{\n    \"message\": {\n      \"role\": \"assistant\",\n      \"content\": \"Paris.\",\n    },\n    \"finish_reason\": \"stop\"\n  }],\n  \"usage\": {\n    \"prompt_tokens\": 19,\n    \"completion_tokens\": 2,\n    \"total_tokens\": 21\n  }\n}"
+  },
+  {
+    "objectID": "index.html#example-request-1",
+    "href": "index.html#example-request-1",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Example Request",
+    "text": "Example Request\ncurl https://api.openai.com/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4.1\",\n    \"messages\": [\n      {\"role\": \"system\", \"content\": \"You are a terse assistant.\"},\n      {\"role\": \"user\", \"content\": \"What is the capitol of France?\"},\n      {\"role\": \"assistant\", \"content\": \"Paris.\"},\n      {\"role\": \"user\", \"content\": \"What is its most famous landmark?\"}\n    ]\n}'"
+  },
+  {
+    "objectID": "index.html#example-response-abridged-1",
+    "href": "index.html#example-response-abridged-1",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Example Response (abridged)",
+    "text": "Example Response (abridged)\n{\n  \"choices\": [{\n    \"message\": {\n      \"role\": \"assistant\",\n      \"content\": \"The Eiffel Tower.\"\n    },\n    \"finish_reason\": \"stop\"\n  }],\n  \"usage\": {\n    \"prompt_tokens\": 30,\n    \"completion_tokens\": 5,\n    \"total_tokens\": 35\n  }\n}"
+  },
+  {
+    "objectID": "index.html#tokens",
+    "href": "index.html#tokens",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Tokens",
+    "text": "Tokens\n\n\nFundamental units of information for LLMs\nWords, parts of words, or individual characters\n\n“hello” → 1 token\n“unconventional” → 3 tokens: un|con|ventional\n4K video frame at full res → 6885 tokens\n\nExample with OpenAI Tokenizer\nImportant for:\n\nModel input/output has hard limits\nAPI pricing is usually by token (see calculator)"
+  },
+  {
+    "objectID": "index.html#designed-for-both-programmatic-and-interactive-use",
+    "href": "index.html#designed-for-both-programmatic-and-interactive-use",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Designed for both programmatic and interactive use",
+    "text": "Designed for both programmatic and interactive use\n\nInteractive — for exploration and debugging\n\nellmer::chat() automatically streams output to the console by default\nEnter a chat client using live_console(chat) or live_browser(chat)\n\nProgrammatic — for building on top of\n\nclient$chat(prompt) returns a string\nclient$stream(prompt) returns a streaming output object\nSupports asynchronous programming with client$chat_async(prompt) and client$stream_async(prompt)"
+  },
+  {
+    "objectID": "index.html#your-turn",
+    "href": "index.html#your-turn",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Your turn",
+    "text": "Your turn\nOpen and run 01-basics.R.\nIf it errors, now is the time to debug; open troubleshoot.R and run it. Otherwise:\n\nStudy the code and try to understand how it maps to the low-level HTTP descriptions we just went through\nTry live_browser(client) to open a browser-based chat client\nTry putting different instructions in the system_prompt and see how it affects the output"
+  },
+  {
+    "objectID": "index.html#summary",
+    "href": "index.html#summary",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Summary",
+    "text": "Summary\n\nA message is an object with a role (“system”, “user”, “assistant”) and a content string\nA chat conversation is a growing list of messages\nThe OpenAI chat API is a stateless HTTP endpoint: takes a list of messages as input, returns a new message as output"
+  },
+  {
+    "objectID": "index.html#shiny-for-r",
+    "href": "index.html#shiny-for-r",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Shiny for R",
+    "text": "Shiny for R\n{shinychat} package\nhttps://github.com/posit-dev/shinychat\n\nDesigned to be used with ellmer\nSee 03-shiny-chat-app.R for an example\nShiny Assistant on the web can’t help you with ui.Chat for data privacy reasons, so instead…"
+  },
+  {
+    "objectID": "index.html#shiny-assistant-for-vs-code-and-positron",
+    "href": "index.html#shiny-assistant-for-vs-code-and-positron",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Shiny Assistant for VS Code and Positron",
+    "text": "Shiny Assistant for VS Code and Positron"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Installation",
+    "text": "Installation"
+  },
+  {
+    "objectID": "index.html#shiny-assistant-requirements",
+    "href": "index.html#shiny-assistant-requirements",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Shiny Assistant requirements",
+    "text": "Shiny Assistant requirements\n\nIn VS Code, requires Copilot subscription\nIn Positron, requires:\n\nAnthropic or OpenAI API key\nEnabling not-yet-documented feature in User Settings"
+  },
+  {
+    "objectID": "index.html#querychat",
+    "href": "index.html#querychat",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "{querychat}",
+    "text": "{querychat}\n\nhttps://github.com/posit-dev/querychat"
+  },
+  {
+    "objectID": "index.html#what-is-tool-calling",
+    "href": "index.html#what-is-tool-calling",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "What is Tool Calling?",
+    "text": "What is Tool Calling?\n\n\nAllows LLMs to interact with other systems\nSounds complicated? It isn’t!\nSupported by most of the newest LLMs, but not all"
+  },
+  {
+    "objectID": "index.html#how-tool-calling-doesnt-work",
+    "href": "index.html#how-tool-calling-doesnt-work",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "How tool calling DOESN’T work",
+    "text": "How tool calling DOESN’T work"
+  },
+  {
+    "objectID": "index.html#how-tool-calling-does-work",
+    "href": "index.html#how-tool-calling-does-work",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "How tool calling DOES work",
+    "text": "How tool calling DOES work"
+  },
+  {
+    "objectID": "index.html#how-it-works",
+    "href": "index.html#how-it-works",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "How It Works",
+    "text": "How It Works\n\n\nNot like this - with the assistant executing stuff\nYes like this\n\nUser asks assistant a question; includes metadata for available tools\nAssistant asks the user to invoke a tool, passing its desired arguments\nUser invokes the tool, and returns the output to the assistant\nAssistant incorporates the tool’s output as additional context for formulating a response"
+  },
+  {
+    "objectID": "index.html#how-it-works-1",
+    "href": "index.html#how-it-works-1",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "How It Works",
+    "text": "How It Works\nAnother way to think of it:\n\nThe client can perform tasks that the assistant can’t do\nTools put control into the hands of the assistant—it decides when to use them, and what arguments to pass in, and what to do with the results\nHaving an “intelligent-ish” coordinator of tools is a surprisingly general, powerful capability!"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": " ",
+    "text": "LLM\n\n LLM with system prompt\n\n LLM with system prompt and tool calling"
+  },
+  {
+    "objectID": "index.html#your-turn-1",
+    "href": "index.html#your-turn-1",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Your Turn",
+    "text": "Your Turn\n\nTake a minute to look at the Ellmer tool calling docs: ellmer tool calling.\nOpen 02-tools-weather.R, skim the code, and run it.\nDo the same for 02-tools-quiz.R.\n(Bonus) Try modifying the weather example to attach a different tool, and ask it a question that would benefit from that tool."
+  },
+  {
+    "objectID": "index.html#model-context-protocol",
+    "href": "index.html#model-context-protocol",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Model Context Protocol",
+    "text": "Model Context Protocol\n\nA standardized way for tools to make themselves available to LLM apps, without writing more code\nProtocol to give LLMs access to tools that can be written in any language\nThe application that uses the tool is an MCP client\nMCP Servers provide the tools. Examples:\n\nGoogle Maps\nFilesystem - access to files on disk\nBrowser MCP - control web browser\n\nClients use the tools. Examples: Claude Desktop app, Claude Code, Continue, Cursor, many others"
+  },
+  {
+    "objectID": "index.html#openai-models",
+    "href": "index.html#openai-models",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "OpenAI models",
+    "text": "OpenAI models\n\nGPT-4.1⭐: good general purpose model, 1 million token context length\n\nGPT-4.1-mini⭐ and GPT-4.1-nano⭐ are faster, cheaper, and dumber versions\n\no3: reasoning model; better for complex math and coding, but much slower and more expensive\no4-mini⭐: faster and cheaper reasoning model, not as good as o3 but cheaper than GPT-4.1\nAPI access via OpenAI or Azure\nTakeaway: Good models for general purpose use"
+  },
+  {
+    "objectID": "index.html#anthropic-models",
+    "href": "index.html#anthropic-models",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Anthropic models",
+    "text": "Anthropic models\n\nClaude Sonnet 4⭐: good general purpose model, best for code generation\n\nClaude Sonnet 3.7⭐ and 3.5⭐ are both still excellent\n\nClaude Opus 4: even stronger than Sonnet 4 (supposedly), but more expensive and slower\nClaude 3.5 Haiku: Faster, cheaper but not cheap enough\nAPI access via Anthropic or AWS Bedrock\nTakeaway: Best model for code generation"
+  },
+  {
+    "objectID": "index.html#google-models",
+    "href": "index.html#google-models",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Google models",
+    "text": "Google models\n\nGemini 2.5 Flash⭐: 1 million token context length, very fast\nGemini 2.5 Pro⭐: 1 million token context length, smarter than Flash\nTakeaway: Largest context length - good if you need to provide lots of information"
+  },
+  {
+    "objectID": "index.html#llama-models",
+    "href": "index.html#llama-models",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Llama models",
+    "text": "Llama models\n\nOpen weights: you can download the model\nCan run locally, for example with Ollama\nLlama 3.1 405b: text, 229GB. Not quite as smart as best closed models.\nLlama 3.2 90b: text+vision, 55GB\nLlama 3.2 11b: text+vision, 7.9GB (can run comfortably on Macbook)\nAPI access via OpenRouter, Groq, AWS Bedrock, others\nTakeaway: Good models if you want to keep all information on premises."
+  },
+  {
+    "objectID": "index.html#deepseek-models",
+    "href": "index.html#deepseek-models",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "DeepSeek models",
+    "text": "DeepSeek models\n\nOpen weights\nDeepSeek R1 671b: 404GB, uses chain of thought (claimed similar perf to OpenAI o1)\nDeepSeek R1 32b, 70b: 20GB, 43GB. Not actually DeepSeek architecture - said to be significantly worse.\nAPI access via DeepSeek, OpenRouter\nCan run locally, but smaller models aren’t really DeepSeek."
+  },
+  {
+    "objectID": "index.html#the-problem",
+    "href": "index.html#the-problem",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "The problem",
+    "text": "The problem\n\nYou want to customize how the LLM responds\nThe LLM doesn’t have the knowledge you need it to\n\nInfo that is too recent\nInfo that is too specific\nInfo that is private"
+  },
+  {
+    "objectID": "index.html#some-solutions",
+    "href": "index.html#some-solutions",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Some solutions",
+    "text": "Some solutions\n\nPrompt engineering\nRetrieval-Augmented Generation\nFine tuning"
+  },
+  {
+    "objectID": "index.html#prompt-engineering-directing-behavioroutput",
+    "href": "index.html#prompt-engineering-directing-behavioroutput",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Prompt engineering: Directing behavior/output",
+    "text": "Prompt engineering: Directing behavior/output\n\n“Respond with just the minimal information necessary.”\n“Think through this step-by-step.”\n“Carefully read and follow these instructions…”\n“If the user asks a question related to data processing, produce R code to accomplish that task.”\n“Be careful to only provide answers that you are sure about. If you are uncertain about an answer, say so.”"
+  },
+  {
+    "objectID": "index.html#prompt-engineering-using-examples-to-guide-behavior",
+    "href": "index.html#prompt-engineering-using-examples-to-guide-behavior",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Prompt engineering: Using examples to guide behavior",
+    "text": "Prompt engineering: Using examples to guide behavior\n\nGoal: Extract ingredient list from recipe and return in a structured format.\nExample user input:\nIn a large bowl, cream together 1 cup of softened unsalted butter and ½ cup of white sugar until smooth. Beat in 1 egg and 1 teaspoon of vanilla extract. Gradually stir in 2 cups of all-purpose flour until the dough forms. Finally, fold in 1 cup of semisweet chocolate chips. Drop spoonfuls of dough onto an ungreased baking sheet and bake at 350°F (175°C) for 10-12 minutes, or until the edges are lightly browned. Let the cookies cool on the baking sheet for a few minutes before transferring to a wire rack to cool completely. Enjoy!"
+  },
+  {
+    "objectID": "index.html#system-prompt-1-just-instructions",
+    "href": "index.html#system-prompt-1-just-instructions",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "System prompt 1: just instructions",
+    "text": "System prompt 1: just instructions\nThe user input contains a recipe. Extract a list of ingredients and return it in JSON format.\nAssistant response:\n{\n  \"ingredients\": [\n    \"1 cup of softened unsalted butter\",\n    \"½ cup of white sugar\",\n    \"1 egg\",\n    \"1 teaspoon of vanilla extract\",\n    \"2 cups of all-purpose flour\",\n    \"1 cup of semisweet chocolate chips\"\n  ]\n}"
+  },
+  {
+    "objectID": "index.html#system-prompt-2-detailed-description-of-output",
+    "href": "index.html#system-prompt-2-detailed-description-of-output",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "System prompt 2: detailed description of output",
+    "text": "System prompt 2: detailed description of output\nThe user input contains a recipe. Extract a list of ingredients and return it in JSON format. It should be an array of objects, where each object has keys `ingredient`, `quantity`, and `unit`. Put each object on one line of output.\nAssistant response:\n[\n    {\"ingredient\": \"unsalted butter\", \"quantity\": 1, \"unit\": \"cup\"},\n    {\"ingredient\": \"white sugar\", \"quantity\": 1/2, \"unit\": \"cup\"},\n    {\"ingredient\": \"egg\", \"quantity\": 1, \"unit\": \"large\"},\n    {\"ingredient\": \"vanilla extract\", \"quantity\": 1, \"unit\": \"teaspoon\"},\n    {\"ingredient\": \"all-purpose flour\", \"quantity\": 2, \"unit\": \"cups\"},\n    {\"ingredient\": \"semisweet chocolate chips\", \"quantity\": 1, \"unit\": \"cup\"}\n]"
+  },
+  {
+    "objectID": "index.html#system-prompt-3-one-shot-example",
+    "href": "index.html#system-prompt-3-one-shot-example",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "System prompt 3: one-shot example",
+    "text": "System prompt 3: one-shot example\nThe user input contains a recipe. Extract a list of ingredients and return it in JSON format.\n\nExample Output:\n\n```json\n[\n    { \"ingredient\": \"Flour\", \"quantity\": 1, \"unit\": \"cup\" },\n    { \"ingredient\": \"Vegetable oil\", \"quantity\": 0.5, \"unit\": \"tsp\" },\n    { \"ingredient\": \"Onion\", \"quantity\": 1, \"unit\": null },\n]\n```\nAssistant response:\n[\n    { \"ingredient\": \"Unsalted butter\", \"quantity\": 1, \"unit\": \"cup\" },\n    { \"ingredient\": \"White sugar\", \"quantity\": 0.5, \"unit\": \"cup\" },\n    { \"ingredient\": \"Egg\", \"quantity\": 1, \"unit\": null },\n    { \"ingredient\": \"Vanilla extract\", \"quantity\": 1, \"unit\": \"teaspoon\" },\n    { \"ingredient\": \"All-purpose flour\", \"quantity\": 2, \"unit\": \"cups\" },\n    { \"ingredient\": \"Semisweet chocolate chips\", \"quantity\": 1, \"unit\": \"cup\" }\n]"
+  },
+  {
+    "objectID": "index.html#adding-contextknowledge-to-prompt",
+    "href": "index.html#adding-contextknowledge-to-prompt",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Adding context/knowledge to prompt",
+    "text": "Adding context/knowledge to prompt\n\nAdd documentation files to prompt\nAdd positive examples (negative examples don’t work well)\nDocs must fit in context window\nExamples\n\nEllmer assistant uses README files in prompt\nSidebot\nFastHTML LLM prompt"
+  },
+  {
+    "objectID": "index.html#rag-retrieval-augmented-generation",
+    "href": "index.html#rag-retrieval-augmented-generation",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "RAG: Retrieval Augmented Generation",
+    "text": "RAG: Retrieval Augmented Generation\n\nUseful when documents don’t fit into context window\nSteps:\n\nUser sends query to app: “How do I …?”\nApp retrieves relevant chunks of text via search\nApp sends text and query to LLM\n\n&lt;chunk 1&gt;, &lt;chunk 2&gt;, &lt;chunk 3&gt;. How do I …?\n\nLLM responds with answer\n\nSearch method typically a semantic instead of keyword search, using vector DB\nLLM will only know about chunks that were retrieved; does not “know” entire corpus\nIn general, prompt stuffing works better, if docs fit in context window"
+  },
+  {
+    "objectID": "index.html#agentic-search",
+    "href": "index.html#agentic-search",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Agentic search",
+    "text": "Agentic search\n\nSimilar to RAG:\n\nExtra information is provided to LLM\n\nDifferent from RAG:\n\nApplication does not search documents and send to LLM along with user prompt\nUser prompt is sent to LLM, then LLM uses a tool to search for relevant documents"
+  },
+  {
+    "objectID": "index.html#fine-tuning",
+    "href": "index.html#fine-tuning",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Fine tuning",
+    "text": "Fine tuning\n\nUpdate weights for an existing model with new information\nNot all models can be fine-tuned\nData must be provided in chat conversation format, with query and response\n\nCan’t just feed it documents – this makes fine-tuning more difficult in practice\n\nSupposedly not very effective unless you have a lot of training data"
+  },
+  {
+    "objectID": "index.html#takeaways",
+    "href": "index.html#takeaways",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Takeaways",
+    "text": "Takeaways\n\nFirst try prompting, then RAG and/or agentic search, and then fine tuning.\nOther resources\n\nOpenAI’s prompt engineering guide\nAnthropic’s prompt engineering guide\nFine-tuning vs. RAG article"
+  },
+  {
+    "objectID": "index.html#going-beyond-chat",
+    "href": "index.html#going-beyond-chat",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Going beyond chat",
+    "text": "Going beyond chat\n\nStructured output can be easily consumed by code: JSON, YAML, CSV, etc.\nUnstructured output cannot: text, images, etc.\n\nLLMs are good at generating unstructured output, but with a little effort, you can get structured output as well."
+  },
+  {
+    "objectID": "index.html#several-techniques-choose-one",
+    "href": "index.html#several-techniques-choose-one",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Several techniques (choose one)",
+    "text": "Several techniques (choose one)\n\nPost-processing: Use a regular expression to extract structured data from the unstructured output (e.g. /```json\\n(.*?)\\n```/)\nSystem prompt: Simply ask the LLM to output structured data. Be clear about what specific format you want, and provide examples—it really helps!\nStructured Output: GPT-4.1 and GPT-4.1-mini have a first-class Structured Output feature: outputs strictly adhere to a JSON schema you write.\nTool calling: Create a tool to receive your output, e.g., set_result(object), where its implementation sets some variable. (Works great for ellmer.)"
+  },
+  {
+    "objectID": "index.html#using-images-as-input",
+    "href": "index.html#using-images-as-input",
+    "title": "Demystifying LLMs with Ellmer",
+    "section": "Using images as input",
+    "text": "Using images as input\n\nModern models are pretty good at this\nCan understand both photographs and plots\nSurprising limitations–make sure you test"
+  },
+  {
+    "objectID": "apps/basic-chat/prompt.html",
+    "href": "apps/basic-chat/prompt.html",
+    "title": "",
+    "section": "",
+    "text": "You are an AI assistant designed to help users with questions about data analysis with R. To answer user questions, you can provide code examples in R. Only answer questions related to data analysis and R."
+  }
+]
