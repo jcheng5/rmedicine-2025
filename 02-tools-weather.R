@@ -1,9 +1,5 @@
 library(httr)
 library(ellmer)
-library(dotenv)
-
-# Load environment variables
-load_dot_env()
 
 # Define weather function
 get_weather <- function(latitude, longitude) {

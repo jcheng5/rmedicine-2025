@@ -19,7 +19,7 @@ client <- chat_anthropic(
 
 # Function to get structured response
 get_structured_response <- function(prompt) {
-  client$extract_data(
+  client$chat_structured(
     prompt,
     type = fruit_schema
   )
