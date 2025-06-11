@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jcheng5.github.io/rmedicine-2025/apps/basic-chat/prompt.html</loc>
-    <lastmod>2025-06-11T18:22:00.385Z</lastmod>
-  </url>
-  <url>
     <loc>https://jcheng5.github.io/rmedicine-2025/index.html</loc>
-    <lastmod>2025-06-11T18:22:00.429Z</lastmod>
+    <lastmod>2025-06-11T21:36:12.987Z</lastmod>
   </url>
   <url>
     <loc>https://jcheng5.github.io/rmedicine-2025/02-tools-prompt.html</loc>
-    <lastmod>2025-06-11T18:22:00.385Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jcheng5.github.io/rmedicine-2025/apps/tool-chat/prompt.html</loc>
-    <lastmod>2025-06-11T18:22:00.386Z</lastmod>
+    <lastmod>2025-06-11T21:36:12.944Z</lastmod>
   </url>
 </urlset>
