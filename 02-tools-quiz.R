@@ -35,4 +35,4 @@ client$register_tool(tool(
 ))
 
 client$chat("Begin", echo = TRUE) # Jump-start the conversation
-live_console(client, quiet = TRUE) # Continue the conversation
+live_browser(client, quiet = TRUE) # Continue the conversation

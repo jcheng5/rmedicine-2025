@@ -8,5 +8,3 @@ client$chat("What is the capital of France?")
 
 # The `client` object is stateful, so this continues the existing conversation
 client$chat("What is its most famous landmark?")
-
-live_browser(client)
