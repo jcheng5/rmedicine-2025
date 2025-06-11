@@ -1,21 +1,15 @@
-[Slides](https://jcheng5.github.io/llm-quickstart/) and sample code for AI Hackathon kickoff.
+# R/Medicine 2025 Workshop: Demystifying LLMs with Ellmer
 
-Please be sure to create an `.env` file in your repo root, with just the lines `OPENAI_API_KEY=...` and `ANTHROPIC_API_KEY=...`.
+1. Clone this repo [https://github.com/jcheng5/rmedicine-2025](https://github.com/jcheng5/rmedicine-2025)
+2. Open the repo in RStudio as a project, or in Positron as a folder
+3. Grab your Anthropic key by going to: \
+[https://beacon.joecheng.com](https://beacon.joecheng.com) \
+and save it to `.Renviron`
+4. Install required packages
 
-## If you plan to use R
-
-```r
-install.packages(c("ellmer", "shinychat", "dotenv", "shiny"))
+```{.r}
+install.packages(c("ellmer", "shinychat", "shiny", "paws.common",
+  "magick", "beepr"))
 ```
 
-## If you plan to use Python
-
-Please create and activate a virtualenv (or conda env), then:
-
-```
-pip install -r requirements.txt
-```
-
-## If you plan to use Go
-
-You can try the [official (alpha) OpenAI client](https://github.com/openai/openai-go) or [this unofficial but popular one](https://github.com/sashabaranov/go-openai).
+5. Restart R

@@ -250,12 +250,10 @@ If it errors, now is the time to debug; open `troubleshoot.R` and run it. Otherw
 ## How It Works
 
 ::: {.incremental}
-- [Not like this](https://sequencediagram.org/index.html?presentationMode=readOnly#initialData=C4S2BsFMAIAkHsDu1j3uaBjAhucIA7Ac2gBEB5AUQGUA5QTAIAVaReAJwGsAoL7TVNtACqAZ0hsuAW2zBxIXABNIIkEQIhM8AiOgAxAIwA2AOwBBaKZEqRwbAWBcADtjahMIZ-ejxHkAokgZAAtxADp2Ih5RcQBaAD5La1t7AC5oAG8AHQJoaDZ0SDSAIgBXMTYigBps3M17P2BigHUgmQByHWAQlkCu8TzVIOBoAiRoGT0-RGwAT2gABRcOAH4q7IBfLkSQGztgeJ8p3pC2cLYiNIBxSmYAegDg8VvMErY2Btuy24AGACZf-QAVlCACsRFouId-McwhF4ttdqkMkVZJJHEU0oZAZVoEU6gowCAtCIMbiRCUCAQZkVNgjkvs4tE2Gksjk8gVitgrDt6Ws2XVZEiigBJYAdaBY6BKIjvZTjAgKaDkykzQAoBNhoAAjQIlUAAMxKGAUswAhEUNkA) - with the assistant executing stuff
-- [Yes like this](https://sequencediagram.org/index.html?presentationMode=readOnly#initialData=C4S2BsFMAIAkHsDu1j3uaBjAhucIA7Ac2gBEB5AUQGVpF4AnAawCgWAHbB0TETg4NHjtIBRJGzAAFpAYA6RkRbZMqBtACqAZ1ksAtpNkhcAE0haQRAiEzwCW6ADEAjADYA7AEFonrRa3A2AJs2rIAtAB8vv6BAgBc0ADeADoE0NAM6JAJAEQArjoMOQA0qem2AqLAuQDqUpIA5A7SMOKSMuoMllKCBEjQkk6iiNgAntAAClxMAPwlZSho4FoJANpEkMAA+ph5DAxVW20tDAC6qQC+LNEgAUHAkaEMCQDCngAy79Ab27v7h8cOgAKHIABgATODnABWHIAShYT0iwmGEhOCgYRASAHFKAAVaAAekBskJfwOAkJBUJEKh0LkACstHYWCixGiOhiiI9CglEjlgJA9OwcglXNDitAchUTGAQHYtKKpVo8gQCKMclckVE-LdYtVoAAlfEaQ0AOSSAqFIrFEqlMrlCqVORVao1VxudwEPNkfIWmSguWwuq9wHmaSwdkF8SlAElgE1oOLoGYiAdzAMCCZoK71YAUAmw0AARhI8qAAGZ5DAmMYAQhylyAA)
-  - User asks assistant a question; includes metadata for available tools
-  - Assistant asks the user to invoke a tool, passing its desired arguments
-  - User invokes the tool, and returns the output to the assistant
-  - Assistant incorporates the tool's output as additional context for formulating a response
+- User asks assistant a question; includes metadata for available tools
+- Assistant asks the user to invoke a tool, passing its desired arguments
+- User invokes the tool, and returns the output to the assistant
+- Assistant incorporates the tool's output as additional context for formulating a response
 :::
 
 ## How It Works
