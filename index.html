@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-494121dfa8658343c03537e94414993d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-99.9.9">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Joe Cheng — CTO, Posit">
   <meta name="dcterms.date" content="2025-06-11">
@@ -30,8 +30,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -95,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-077ed0fd3b2b6c9aff5defd058debd56.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2c1b5f745a11cfad616ebade4a4a7d24.css">
   <link rel="stylesheet" href="styles.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -240,7 +241,6 @@ and save it to <code>.Renviron</code></li>
 </section>
 <section id="framing-llms" class="slide level2">
 <h2>Framing LLMs</h2>
-<div>
 <ul>
 <li class="fragment">Our focus: Practical, actionable information
 <ul>
@@ -253,7 +253,6 @@ and save it to <code>.Renviron</code></li>
 <li class="fragment">Better to start with a highly empirical approach</li>
 </ul></li>
 </ul>
-</div>
 </section></section>
 <section>
 <section id="anatomy-of-a-conversation" class="title-slide slide level1 center">
@@ -262,12 +261,10 @@ and save it to <code>.Renviron</code></li>
 </section>
 <section id="llm-conversations-are-http-requests" class="slide level2">
 <h2>LLM Conversations are HTTP Requests</h2>
-<div>
 <ul>
 <li class="fragment">Each interaction is a separate HTTP API request</li>
 <li class="fragment">The API server is entirely stateless (despite conversations being inherently stateful!)</li>
 </ul>
-</div>
 </section>
 <section id="example-conversation" class="slide level2">
 <h2>Example Conversation</h2>
@@ -348,7 +345,6 @@ and save it to <code>.Renviron</code></li>
 </section>
 <section id="tokens" class="slide level2 smaller">
 <h2>Tokens</h2>
-<div>
 <ul>
 <li class="fragment">Fundamental units of information for LLMs</li>
 <li class="fragment">Words, parts of words, or individual characters
@@ -364,7 +360,6 @@ and save it to <code>.Renviron</code></li>
 <li class="fragment">API pricing is usually by token (see <a href="https://gptforwork.com/tools/openai-chatgpt-api-pricing-calculator">calculator</a>)</li>
 </ul></li>
 </ul>
-</div>
 </section></section>
 <section>
 <section id="introducing-ellmer" class="title-slide slide level1 center">
@@ -457,13 +452,11 @@ and save it to <code>.Renviron</code></li>
 </section>
 <section id="what-is-tool-calling" class="slide level2">
 <h2>What is Tool Calling?</h2>
-<div>
 <ul>
 <li class="fragment">Allows LLMs to interact with other systems</li>
 <li class="fragment">Sounds complicated? It isn’t!</li>
 <li class="fragment">Supported by most of the newest LLMs, but not all</li>
 </ul>
-</div>
 </section>
 <section id="how-tool-calling-doesnt-work" class="slide level2">
 <h2>How tool calling DOESN’T work</h2>
@@ -475,7 +468,6 @@ and save it to <code>.Renviron</code></li>
 <img data-src="images/tool-calling-correct.svg" style="margin: inherit auto;" class="r-stretch"></section>
 <section id="how-it-works" class="slide level2">
 <h2>How It Works</h2>
-<div>
 <ul>
 <li class="fragment"><a href="https://sequencediagram.org/index.html?presentationMode=readOnly#initialData=C4S2BsFMAIAkHsDu1j3uaBjAhucIA7Ac2gBEB5AUQGUA5QTAIAVaReAJwGsAoL7TVNtACqAZ0hsuAW2zBxIXABNIIkEQIhM8AiOgAxAIwA2AOwBBaKZEqRwbAWBcADtjahMIZ-ejxHkAokgZAAtxADp2Ih5RcQBaAD5La1t7AC5oAG8AHQJoaDZ0SDSAIgBXMTYigBps3M17P2BigHUgmQByHWAQlkCu8TzVIOBoAiRoGT0-RGwAT2gABRcOAH4q7IBfLkSQGztgeJ8p3pC2cLYiNIBxSmYAegDg8VvMErY2Btuy24AGACZf-QAVlCACsRFouId-McwhF4ttdqkMkVZJJHEU0oZAZVoEU6gowCAtCIMbiRCUCAQZkVNgjkvs4tE2Gksjk8gVitgrDt6Ws2XVZEiigBJYAdaBY6BKIjvZTjAgKaDkykzQAoBNhoAAjQIlUAAMxKGAUswAhEUNkA">Not like this</a> - with the assistant executing stuff</li>
 <li class="fragment"><a href="https://sequencediagram.org/index.html?presentationMode=readOnly#initialData=C4S2BsFMAIAkHsDu1j3uaBjAhucIA7Ac2gBEB5AUQGVpF4AnAawCgWAHbB0TETg4NHjtIBRJGzAAFpAYA6RkRbZMqBtACqAZ1ksAtpNkhcAE0haQRAiEzwCW6ADEAjADYA7AEFonrRa3A2AJs2rIAtAB8vv6BAgBc0ADeADoE0NAM6JAJAEQArjoMOQA0qem2AqLAuQDqUpIA5A7SMOKSMuoMllKCBEjQkk6iiNgAntAAClxMAPwlZSho4FoJANpEkMAA+ph5DAxVW20tDAC6qQC+LNEgAUHAkaEMCQDCngAy79Ab27v7h8cOgAKHIABgATODnABWHIAShYT0iwmGEhOCgYRASAHFKAAVaAAekBskJfwOAkJBUJEKh0LkACstHYWCixGiOhiiI9CglEjlgJA9OwcglXNDitAchUTGAQHYtKKpVo8gQCKMclckVE-LdYtVoAAlfEaQ0AOSSAqFIrFEqlMrlCqVORVao1VxudwEPNkfIWmSguWwuq9wHmaSwdkF8SlAElgE1oOLoGYiAdzAMCCZoK71YAUAmw0AARhI8qAAGZ5DAmMYAQhylyAA">Yes like this</a>
@@ -486,7 +478,6 @@ and save it to <code>.Renviron</code></li>
 <li class="fragment">Assistant incorporates the tool’s output as additional context for formulating a response</li>
 </ul></li>
 </ul>
-</div>
 </section>
 <section id="how-it-works-1" class="slide level2">
 <h2>How It Works</h2>
@@ -686,7 +677,7 @@ Example Output:
 <p>Assistant response:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb12-1"><a></a><span class="ot">[</span></span>
 <span id="cb12-2"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"Unsalted butter"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="st">"cup"</span> <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb12-3"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"White sugar"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">0</span><span class="er">.</span><span class="dv">5</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="st">"cup"</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb12-3"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"White sugar"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="fl">0.5</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="st">"cup"</span> <span class="fu">}</span><span class="ot">,</span></span>
 <span id="cb12-4"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"Egg"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="kw">null</span> <span class="fu">}</span><span class="ot">,</span></span>
 <span id="cb12-5"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"Vanilla extract"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="st">"teaspoon"</span> <span class="fu">}</span><span class="ot">,</span></span>
 <span id="cb12-6"><a></a>    <span class="fu">{</span> <span class="dt">"ingredient"</span><span class="fu">:</span> <span class="st">"All-purpose flour"</span><span class="fu">,</span> <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span> <span class="dt">"unit"</span><span class="fu">:</span> <span class="st">"cups"</span> <span class="fu">}</span><span class="ot">,</span></span>
@@ -1040,192 +1031,172 @@ Example Output:
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/jcheng5\.github\.io\/rmedicine-2025\/");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-          }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/jcheng5\.github\.io\/rmedicine-2025\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

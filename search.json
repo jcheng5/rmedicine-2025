@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "apps/tool-chat/prompt.html",
-    "href": "apps/tool-chat/prompt.html",
+    "objectID": "apps/basic-chat/prompt.html",
+    "href": "apps/basic-chat/prompt.html",
     "title": "",
     "section": "",
-    "text": "You are an assistant which can convert units and perform basic arithmetic with units."
-  },
-  {
-    "objectID": "02-tools-prompt.html",
-    "href": "02-tools-prompt.html",
-    "title": "",
-    "section": "",
-    "text": "You’re hosting a quiz game show.\n\nBefore you start, ask the user to choose a theme.\nAsk simple questions and ask the user to answer them via multiple choice.\nAfter the user answers, provide feedback and then move on to the next question.\nAfter every 5 questions, declare the user to be a winner regardless of their score, lavish them with praise, and start the game over.\nPlay sound effects for each answer, and when the user ‘wins’.\nEmojis are fun, use them liberally!\n\nExample:\n&lt;Assistant&gt;\n  **Question 3:** What is the center of an atom called?\n\n  A) Electron\n  B) Proton\n  C) Neutron\n  D) Nucleus\n\n  Your answer?\n&lt;/Assistant&gt;\n&lt;User&gt;\n  D\n&lt;/User&gt;\n&lt;Assistant&gt;\n  &lt;ToolCall&gt;\n    {\n      id: \"call_1551214\",\n      function: {\n        arguments: \"{sound: 'correct'}\",\n        name: \"play_sound\"\n      },\n      type: \"function\"\n    }\n  &lt;/ToolCall&gt;\n&lt;/Assistant&gt;\n&lt;User&gt;\n  &lt;ToolResponse&gt;\n    {\n      id: \"call_1551214\",\n      result: {\n        success: true,\n        value: null\n      }\n    }\n  &lt;/ToolResponse&gt;\n&lt;/User&gt;\n&lt;Assistant&gt;\n  Correct! The nucleus is the center of an atom.\n\n  **Question 4:** ...\n&lt;/Assistant&gt;\""
+    "text": "You are an AI assistant designed to help users with questions about data analysis with R. To answer user questions, you can provide code examples in R. Only answer questions related to data analysis and R."
   },
   {
     "objectID": "index.html#setup",
@@ -32,14 +25,14 @@
     "href": "index.html#framing-llms",
     "title": "Demystifying LLMs with Ellmer",
     "section": "Framing LLMs",
-    "text": "Framing LLMs\n\n\nOur focus: Practical, actionable information\n\nOften, just enough knowledge so you know what to search for (or better yet, what to ask an LLM)\n\nWe will treat LLMs as black boxes\nDon’t focus on how they work (yet)\n\nLeads to bad intuition about their capabilities\nBetter to start with a highly empirical approach"
+    "text": "Framing LLMs\n\nOur focus: Practical, actionable information\n\nOften, just enough knowledge so you know what to search for (or better yet, what to ask an LLM)\n\nWe will treat LLMs as black boxes\nDon’t focus on how they work (yet)\n\nLeads to bad intuition about their capabilities\nBetter to start with a highly empirical approach"
   },
   {
     "objectID": "index.html#llm-conversations-are-http-requests",
     "href": "index.html#llm-conversations-are-http-requests",
     "title": "Demystifying LLMs with Ellmer",
     "section": "LLM Conversations are HTTP Requests",
-    "text": "LLM Conversations are HTTP Requests\n\n\nEach interaction is a separate HTTP API request\nThe API server is entirely stateless (despite conversations being inherently stateful!)"
+    "text": "LLM Conversations are HTTP Requests\n\nEach interaction is a separate HTTP API request\nThe API server is entirely stateless (despite conversations being inherently stateful!)"
   },
   {
     "objectID": "index.html#example-conversation",
@@ -81,7 +74,7 @@
     "href": "index.html#tokens",
     "title": "Demystifying LLMs with Ellmer",
     "section": "Tokens",
-    "text": "Tokens\n\n\nFundamental units of information for LLMs\nWords, parts of words, or individual characters\n\n“hello” → 1 token\n“unconventional” → 3 tokens: un|con|ventional\n4K video frame at full res → 6885 tokens\n\nExample with OpenAI Tokenizer\nImportant for:\n\nModel input/output has hard limits\nAPI pricing is usually by token (see calculator)"
+    "text": "Tokens\n\nFundamental units of information for LLMs\nWords, parts of words, or individual characters\n\n“hello” → 1 token\n“unconventional” → 3 tokens: un|con|ventional\n4K video frame at full res → 6885 tokens\n\nExample with OpenAI Tokenizer\nImportant for:\n\nModel input/output has hard limits\nAPI pricing is usually by token (see calculator)"
   },
   {
     "objectID": "index.html#designed-for-both-programmatic-and-interactive-use",
@@ -144,7 +137,7 @@
     "href": "index.html#what-is-tool-calling",
     "title": "Demystifying LLMs with Ellmer",
     "section": "What is Tool Calling?",
-    "text": "What is Tool Calling?\n\n\nAllows LLMs to interact with other systems\nSounds complicated? It isn’t!\nSupported by most of the newest LLMs, but not all"
+    "text": "What is Tool Calling?\n\nAllows LLMs to interact with other systems\nSounds complicated? It isn’t!\nSupported by most of the newest LLMs, but not all"
   },
   {
     "objectID": "index.html#how-tool-calling-doesnt-work",
@@ -165,7 +158,7 @@
     "href": "index.html#how-it-works",
     "title": "Demystifying LLMs with Ellmer",
     "section": "How It Works",
-    "text": "How It Works\n\n\nNot like this - with the assistant executing stuff\nYes like this\n\nUser asks assistant a question; includes metadata for available tools\nAssistant asks the user to invoke a tool, passing its desired arguments\nUser invokes the tool, and returns the output to the assistant\nAssistant incorporates the tool’s output as additional context for formulating a response"
+    "text": "How It Works\n\nNot like this - with the assistant executing stuff\nYes like this\n\nUser asks assistant a question; includes metadata for available tools\nAssistant asks the user to invoke a tool, passing its desired arguments\nUser invokes the tool, and returns the output to the assistant\nAssistant incorporates the tool’s output as additional context for formulating a response"
   },
   {
     "objectID": "index.html#how-it-works-1",
@@ -336,10 +329,17 @@
     "text": "Using images as input\n\nModern models are pretty good at this\nCan understand both photographs and plots\nSurprising limitations–make sure you test"
   },
   {
-    "objectID": "apps/basic-chat/prompt.html",
-    "href": "apps/basic-chat/prompt.html",
+    "objectID": "02-tools-prompt.html",
+    "href": "02-tools-prompt.html",
     "title": "",
     "section": "",
-    "text": "You are an AI assistant designed to help users with questions about data analysis with R. To answer user questions, you can provide code examples in R. Only answer questions related to data analysis and R."
+    "text": "You’re hosting a quiz game show.\n\nBefore you start, ask the user to choose a theme.\nAsk simple questions and ask the user to answer them via multiple choice.\nAfter the user answers, provide feedback and then move on to the next question.\nAfter every 5 questions, declare the user to be a winner regardless of their score, lavish them with praise, and start the game over.\nPlay sound effects for each answer, and when the user ‘wins’.\nEmojis are fun, use them liberally!\n\nExample:\n&lt;Assistant&gt;\n  **Question 3:** What is the center of an atom called?\n\n  A) Electron\n  B) Proton\n  C) Neutron\n  D) Nucleus\n\n  Your answer?\n&lt;/Assistant&gt;\n&lt;User&gt;\n  D\n&lt;/User&gt;\n&lt;Assistant&gt;\n  &lt;ToolCall&gt;\n    {\n      id: \"call_1551214\",\n      function: {\n        arguments: \"{sound: 'correct'}\",\n        name: \"play_sound\"\n      },\n      type: \"function\"\n    }\n  &lt;/ToolCall&gt;\n&lt;/Assistant&gt;\n&lt;User&gt;\n  &lt;ToolResponse&gt;\n    {\n      id: \"call_1551214\",\n      result: {\n        success: true,\n        value: null\n      }\n    }\n  &lt;/ToolResponse&gt;\n&lt;/User&gt;\n&lt;Assistant&gt;\n  Correct! The nucleus is the center of an atom.\n\n  **Question 4:** ...\n&lt;/Assistant&gt;\""
+  },
+  {
+    "objectID": "apps/tool-chat/prompt.html",
+    "href": "apps/tool-chat/prompt.html",
+    "title": "",
+    "section": "",
+    "text": "You are an assistant which can convert units and perform basic arithmetic with units."
   }
 ]
