@@ -67,8 +67,8 @@ ui <- bslib::page_fluid(
 )
 
 server <- function(input, output, session) {
-  chat <- ellmer::chat_openai(
-    model = "gpt-4.1",
+  client <- ellmer::chat_anthropic(
+    model = "claude-sonnet-4-20250514",
   )
 
   observeEvent(input$chat_user_input, {
@@ -95,8 +95,8 @@ server <- function(input, output, session) {
     # Uncomment this to see the query printed to the console.
     # cat(context_query)
 
-    # Send query with context to chat
-    stream <- chat$stream_async(context_query)
+    # Send query with context to client
+    stream <- client$stream_async(context_query)
     chat_append("chat", stream)
   })
 }

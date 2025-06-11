@@ -12,12 +12,12 @@ ui <- page_fluid(
 )
 
 server <- function(input, output, session) {
-  chat <- ellmer::chat_claude(
+  client <- ellmer::chat_claude(
     model = "claude-3-5-sonnet-20241022",
     system_prompt = prompt
   )
   observeEvent(input$chat_user_input, {
-    chat_append("chat", chat$stream_async(input$chat_user_input))
+    chat_append("chat", client$stream_async(input$chat_user_input))
   })
 }
 

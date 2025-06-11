@@ -2,3 +2,4 @@ project:
   type: website
 resources:
   - styles.css
+  - images/

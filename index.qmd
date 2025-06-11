@@ -178,15 +178,15 @@ curl https://api.openai.com/v1/chat/completions \
   - `client$stream(prompt)` returns a streaming output object
   - Supports asynchronous programming with `client$chat_async(prompt)` and `client$stream_async(prompt)`
 
-# Your Turn
-
-## Instructions
+## Your turn
 
 Open and run `01-basics.R`.
 
-If it errors, now is the time to debug.
+If it errors, now is the time to debug; open `troubleshoot.R` and run it. Otherwise:
 
-If it works, study the code and try to understand how it maps to the low-level HTTP descriptions we just went through.
+1. Study the code and try to understand how it maps to the low-level HTTP descriptions we just went through
+2. Try `live_browser(client)` to open a browser-based chat client
+3. Try putting different instructions in the `system_prompt` and see how it affects the output
 
 ## Summary
 
@@ -207,11 +207,11 @@ If it works, study the code and try to understand how it maps to the low-level H
 
 ## Shiny Assistant for VS Code and Positron
 
-![](shiny-assistant-extension-1.png)
+![](images/shiny-assistant-extension-1.png)
 
 ## Installation
 
-![](shiny-assistant-extension-2.png)
+![](images/shiny-assistant-extension-2.png)
 
 ## Shiny Assistant requirements
 
@@ -238,6 +238,14 @@ If it works, study the code and try to understand how it maps to the low-level H
 
 :::
 
+## How tool calling DOESN'T work
+
+![](images/tool-calling-incorrect.svg){style="margin: inherit auto;"}
+
+## How tool calling DOES work
+
+![](images/tool-calling-correct.svg){style="margin: inherit auto;"}
+
 ## How It Works
 
 ::: {.incremental}
@@ -257,7 +265,28 @@ Another way to think of it:
 - Tools put control into the hands of the assistant—it decides when to use them, and what arguments to pass in, and what to do with the results
 - Having an "intelligent-ish" coordinator of tools is a surprisingly general, powerful capability!
 
-# Your Turn {.smaller}
+## &nbsp; {.smaller}
+
+:::: {.columns style="font-size: 0.6em;"}
+
+::: {.column width="33%"}
+![](images/elephant1.png){alt="A sitting elephant, with a leash tied to a stake"}
+LLM
+:::
+
+::: {.column width="33%"}
+![](images/elephant2.png){alt="The same elephant, with a top hat and monocle"}
+LLM with system prompt
+:::
+
+::: {.column width="33%"}
+![](images/elephant3.png){alt="An elephant in a mech suit, bristling with weapons"}
+LLM with system prompt and tool calling
+:::
+
+::::
+
+## Your Turn
 
 1. Take a minute to look at the Ellmer tool calling docs: [ellmer tool calling](https://ellmer.tidyverse.org/articles/tool-calling.html).
 2. Open `02-tools-weather.R`, skim the code, and run it.

@@ -16,7 +16,17 @@ local({
   }
 
   diagnose <- function() {
-    repo_dir <- dirname(attr(body(diagnose), "srcfile")$filename)
+    this_file <- attr(body(diagnose), "srcfile")$filename
+    if (this_file == "") {
+      # The file was run in the console, not sourced
+      this_file <- rstudioapi::getActiveDocumentContext()$path
+      if (basename(this_file) != "troubleshoot.R") {
+        stop("Please source this script, not run it directly in the console.")
+      } else {
+        # The file was run in the console, but we recovered by using rstudioapi
+      }
+    }
+    repo_dir <- dirname(this_file)
 
     TRUE &&
       check(

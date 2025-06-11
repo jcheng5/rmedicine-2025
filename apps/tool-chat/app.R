@@ -12,12 +12,12 @@ ui <- bslib::page_fluid(
 )
 
 server <- function(input, output, session) {
-  chat <- ellmer::chat_openai(
-    model = "gpt-4.1",
+  client <- ellmer::chat_anthropic(
+    model = "claude-sonnet-4-20250514",
     system_prompt = system_prompt
   )
 
-  chat$register_tool(tool(
+  client$register_tool(tool(
     convert_length,
     "Converts a length from one unit to another.",
     value = type_number(
@@ -31,7 +31,7 @@ server <- function(input, output, session) {
     )
   ))
 
-  chat$register_tool(tool(
+  client$register_tool(tool(
     convert_mass,
     "Converts a mass from one unit to another.",
     value = type_number(
@@ -45,7 +45,7 @@ server <- function(input, output, session) {
     )
   ))
 
-  chat$register_tool(tool(
+  client$register_tool(tool(
     add,
     "Calculates the sum of two numbers.",
     x = type_number(
@@ -56,7 +56,7 @@ server <- function(input, output, session) {
     )
   ))
 
-  chat$register_tool(tool(
+  client$register_tool(tool(
     multiply,
     "Calculates the product of two numbers.",
     x = type_number(
@@ -69,7 +69,7 @@ server <- function(input, output, session) {
 
 
   observeEvent(input$chat_user_input, {
-    stream <- chat$stream_async(input$chat_user_input)
+    stream <- client$stream_async(input$chat_user_input)
     chat_append("chat", stream)
   })
   chat_append("chat", "Hi, I'm **Unit Coversion Assistant**! I can do unit conversions and simple calculations for you.")
